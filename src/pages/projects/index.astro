@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<Base title="Proyectos">
+  <main>
+    <h1>Proyectos</h1>
+    <ul style="list-style: none; margin-top: 1rem;">
+      {projects.map((project) => (
+        <li style="margin-bottom: 1.5rem;">
+          <a href={`/projects/${project.id}`} style="font-size: 1.125rem; font-weight: 600;">
+            {project.data.title}
+          </a>
+          <p style="color: #555;">{project.data.description}</p>
+          {project.data.tags && (
+            <div style="margin-top: 0.25rem;">
+              {project.data.tags.map((tag) => (
+                <span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">{tag}</span>
+              ))}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
