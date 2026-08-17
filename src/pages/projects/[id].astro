@@ -15,7 +15,7 @@ const { Content } = await render(project);
 ---
 <Base title={project.data.title} description={project.data.description}>
   <article>
-    <a href="/projects">&larr; Volver</a>
+    <a href={import.meta.env.BASE_URL + '/projects'}>&larr; Volver</a>
     <h1 style="margin-top: 1rem;">{project.data.title}</h1>
     <p style="color: #666;">{project.data.date.toLocaleDateString('es')}</p>
     {project.data.tags && (
