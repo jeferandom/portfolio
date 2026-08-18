@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="es" data-astro-cid-hkbrpulz><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Plataforma integral para la gestión, tokenización y análisis de corpus lingüísticos con soporte para KWIC, concordancias y múltiples formatos."><title>CLICC - Plataforma de Análisis de Corpus Lingüísticos</title><link rel="icon" href="/portfolio/favicon.ico"><style>[data-astro-cid-hkbrpulz]{box-sizing:border-box;margin:0;padding:0}body{color:#1a1a1a;max-width:640px;margin:0 auto;padding:2rem 1rem;font-family:system-ui,-apple-system,sans-serif;line-height:1.6}a[data-astro-cid-hkbrpulz]{color:#2563eb;text-decoration:none}a[data-astro-cid-hkbrpulz]:hover{text-decoration:underline}nav[data-astro-cid-hkbrpulz]{margin-bottom:2rem}nav[data-astro-cid-hkbrpulz] a[data-astro-cid-hkbrpulz]{margin-right:1rem}footer[data-astro-cid-hkbrpulz]{color:#666;border-top:1px solid #eee;margin-top:4rem;padding-top:1rem;font-size:.875rem}
+</style></head><body data-astro-cid-hkbrpulz><nav data-astro-cid-hkbrpulz><a href="/portfolio/" data-astro-cid-hkbrpulz>Inicio</a><a href="/portfolio/projects" data-astro-cid-hkbrpulz>Proyectos</a></nav><article><a href="/portfolio/projects">&larr; Volver</a><h1 style="margin-top: 1rem;">CLICC - Plataforma de Análisis de Corpus Lingüísticos</h1><p style="color: #666;">14/5/2025</p><div style="margin: 0.5rem 0;"><span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">Next.js</span><span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">NestJS</span><span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">TypeScript</span><span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">MongoDB</span><span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">React</span><span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">FFmpeg</span></div><div style="margin: 1rem 0;"><a href="https://github.com/jef/clicc-25" target="_blank" style="margin-left: 1rem;">Código &rarr;</a></div><div style="margin-top: 2rem;"><h2 id="descripción">Descripción</h2>
+<p><strong>CLICC</strong> es una plataforma de software para la gestión, procesamiento y análisis de corpus lingüísticos desarrollada para el Instituto Caro y Cuervo. Permite a investigadores subir textos, tokenizarlos automáticamente, buscar palabras clave y generar concordancias ( KWIC - Key Word In Context) sobre uno o múltiples corpus de forma simultanea.</p>
+<p>El sistema procesa textos en tres formatos de entrada (texto plano, CoNLL-U y TEI XML), almacena los tokens con anotaciones lingüísticas completas (lema, POS, dependencias) y ofrece una interfaz web moderna para realizar búsquedas avanzadas con contexto configurable.</p>
+<h2 id="tecnologías">Tecnologías</h2>
+<ul>
+<li><strong>Next.js 15</strong> (frontend)</li>
+<li><strong>NestJS</strong> (backend API)</li>
+<li><strong>React 19</strong> + <strong>MUI</strong> (interfaz de usuario)</li>
+<li><strong>MongoDB</strong> (almacenamiento)</li>
+<li><strong>FFmpeg</strong> (conversion de videos)</li>
+<li><strong>TipTap</strong> (editor de texto enriquecido)</li>
+<li><strong>Zustand</strong> (gestión de estado)</li>
+<li><strong>TypeScript</strong> + <strong>Zod</strong> (validación)</li>
+<li><strong>Tailwind CSS</strong> + <strong>Emotion</strong> (estilos)</li>
+</ul>
+<h2 id="lo-que-hice">Lo que hice</h2>
+<ul>
+<li>Desarrollé el <strong>frontend completo en Next.js</strong> con arquitectura de layouts, autenticación, registro de usuarios y confirmación de email</li>
+<li>Implementé el <strong>dashboard de corpus</strong> con tabla virtualizada, subida de archivos y gestión de metadatos geográficos (GeoJSON)</li>
+<li>Construí la interfaz de <strong>búsquedas KWIC</strong> con contexto configurable (izquierdo/derecho), paginación y combinación de resultados multi-corpus</li>
+<li>Implementé el <strong>sistema de tokenización</strong> con estrategias por formato: texto plano (UDPipe/local), CoNLL-U (importación directa) y TEI XML (preservación de anotaciones)</li>
+<li>Desarrollé el <strong>backend NestJS</strong> con arquitectura modular: módulos de corpus, archivos, tokens, autenticación, usuarios, idiomas, localización y correo</li>
+<li>Optimicé las consultas de MongoDB con índices estratégicos y inserciones en lotes de 10.000 tokens para altas prestaciones</li>
+<li>Integré <strong>FFmpeg</strong> para la conversión automática de videos MOV a MP4 con diálogo de confirmación al usuario</li>
+<li>Configuré el despliegue con PM2/Nginx en producción (HTTPS, reverse proxy, variables de entorno embebidas en build)</li>
+<li>Implementé migraciones de datos legacy para corpus, speakers y archivos</li>
+<li>Agregué tests unitarios con Vitest para el backend y Testing Library para el frontend</li>
+</ul>
+<h2 id="arquitectura">Arquitectura</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>clicc-25/          (Frontend - Next.js)</span></span>
+<span class="line"><span>  └── src/</span></span>
+<span class="line"><span>      ├── app/      (rutas: auth, corpus, home, KWIC, concordancias)</span></span>
+<span class="line"><span>      ├── components/(interfaz reusable, tablas, formularios)</span></span>
+<span class="line"><span>      ├── services/ (cliente API, tokenización)</span></span>
+<span class="line"><span>      ├── stores/   (estado global con Zustand)</span></span>
+<span class="line"><span>      └── hooks/    (hooks personalizados)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>clicc-backend/     (Backend - NestJS)</span></span>
+<span class="line"><span>  └── src/</span></span>
+<span class="line"><span>      ├── tokenization/ (KWIC, concordancias, procesamiento de archivos)</span></span>
+<span class="line"><span>      ├── corpus/       (gestión de corpus y archivos)</span></span>
+<span class="line"><span>      ├── auth/         (JWT, registro, confirmación de email)</span></span>
+<span class="line"><span>      ├── user/         (CRUD de usuarios)</span></span>
+<span class="line"><span>      ├── speaker/      (gestión de oradores)</span></span>
+<span class="line"><span>      ├── location/     (ubicaciones geográficas)</span></span>
+<span class="line"><span>      └── files/        (subida y conversión de archivos)</span></span></code></pre>
+</div></article><footer data-astro-cid-hkbrpulz>&copy; 2026</footer></body></html>
