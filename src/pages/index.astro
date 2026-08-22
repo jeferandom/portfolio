@@ -3,6 +3,34 @@ import Base from '../layouts/Base.astro';
 ---
 <Base title="Portfolio | Jhefferson Mancera Silva">
   <main>
+    <section style="background: #fff8e6; border: 1px solid #f0d488; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 2rem;">
+      <h2 style="font-size: 1.125rem;">En construcción</h2>
+      <p style="color: #555; font-size: 0.875rem; margin-top: 0.25rem;">
+        Esta sección estará lista el <strong>24 de agosto de 2026 a las 8:00 a. m.</strong>
+      </p>
+      <div id="countdown-home" style="display: flex; gap: 0.75rem; margin-top: 0.75rem; text-align: center;" aria-live="polite">
+        <div style="background: #fff; border: 1px solid #eee; border-radius: 6px; padding: 0.5rem 0; min-width: 3.5rem;">
+          <span id="cdh-days" style="font-size: 1.25rem; font-weight: 700;">--</span>
+          <small style="display: block; font-size: 0.625rem; color: #666; text-transform: uppercase;">días</small>
+        </div>
+        <div style="background: #fff; border: 1px solid #eee; border-radius: 6px; padding: 0.5rem 0; min-width: 3.5rem;">
+          <span id="cdh-hours" style="font-size: 1.25rem; font-weight: 700;">--</span>
+          <small style="display: block; font-size: 0.625rem; color: #666; text-transform: uppercase;">horas</small>
+        </div>
+        <div style="background: #fff; border: 1px solid #eee; border-radius: 6px; padding: 0.5rem 0; min-width: 3.5rem;">
+          <span id="cdh-minutes" style="font-size: 1.25rem; font-weight: 700;">--</span>
+          <small style="display: block; font-size: 0.625rem; color: #666; text-transform: uppercase;">min</small>
+        </div>
+        <div style="background: #fff; border: 1px solid #eee; border-radius: 6px; padding: 0.5rem 0; min-width: 3.5rem;">
+          <span id="cdh-seconds" style="font-size: 1.25rem; font-weight: 700;">--</span>
+          <small style="display: block; font-size: 0.625rem; color: #666; text-transform: uppercase;">seg</small>
+        </div>
+      </div>
+      <noscript>
+        <p style="margin-top: 0.5rem; font-size: 0.875rem;">Lanzamiento: 24 de agosto de 2026, 8:00 a. m.</p>
+      </noscript>
+    </section>
+
     <h1>Hola, soy Jhefferson Mancera Silva</h1>
     <p>Full Stack Developer con 6 años de experiencia en JavaScript, especializado en React y Node.js. Experiencia en startups, equipos remotos y entrega continua.</p>
 
@@ -26,3 +54,28 @@ import Base from '../layouts/Base.astro';
     </section>
   </main>
 </Base>
+
+<script>
+  const target = new Date('2026-08-24T08:00:00').getTime();
+
+  function updateCountdownHome() {
+    const container = document.getElementById('countdown-home');
+    if (!container) return;
+
+    const diff = target - Date.now();
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor(diff / 3600000) % 24;
+    const minutes = Math.floor(diff / 60000) % 60;
+    const seconds = Math.floor(diff / 1000) % 60;
+
+    document.getElementById('cdh-days')!.textContent = String(days);
+    document.getElementById('cdh-hours')!.textContent = String(hours).padStart(2, '0');
+    document.getElementById('cdh-minutes')!.textContent = String(minutes).padStart(2, '0');
+    document.getElementById('cdh-seconds')!.textContent = String(seconds).padStart(2, '0');
+
+    setTimeout(updateCountdownHome, 1000);
+  }
+
+  updateCountdownHome();
+</script>
