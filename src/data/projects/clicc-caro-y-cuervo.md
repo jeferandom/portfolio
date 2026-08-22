@@ -4,6 +4,7 @@ description: "Plataforma integral para la gestión, tokenización y análisis de
 date: 2025-05-15
 tags: ["Next.js", "NestJS", "TypeScript", "MongoDB", "React", "FFmpeg"]
 repo: ""
+featured: true
 ---
 
 ## Descripción

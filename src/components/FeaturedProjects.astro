@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+
+const featured = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+{featured.length > 0 && (
+  <section class="mt-6">
+    <h2 class="text-lg font-semibold text-white">Proyectos destacados</h2>
+    <ul class="mt-3 grid gap-4 sm:grid-cols-2">
+      {featured.map((project) => (
+        <li>
+          <a
+            href={`${import.meta.env.BASE_URL}/projects/${project.id}`}
+            class="group block rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition hover:border-white/40 hover:bg-white/15"
+          >
+            <h3 class="text-base font-semibold text-white group-hover:underline">
+              {project.data.title}
+            </h3>
+            <p class="mt-1.5 text-sm text-white/75 line-clamp-2">
+              {project.data.description}
+            </p>
+            {project.data.tags && (
+              <div class="mt-2.5 flex flex-wrap gap-1">
+                {project.data.tags.map((tag) => (
+                  <span class="rounded-full bg-white/15 px-2 py-0.5 text-xs text-white/80">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-3">
+      <a href={import.meta.env.BASE_URL + '/projects'} class="font-medium text-white hover:underline">
+        Ver todos los proyectos &rarr;
+      </a>
+    </p>
+  </section>
+)}

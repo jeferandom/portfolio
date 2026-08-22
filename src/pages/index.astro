@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import FeaturedProjects from '../components/FeaturedProjects.astro';
 import { Github as GithubIcon, React, Nodedotjs, Typescript, Tailwindcss, Docker, Mongodb, Nextdotjs, Nestjs, Git, Instagram, Youtube, Discord, Whatsapp } from 'simple-icons-astro';
 ---
 <Base title="Portfolio | Jhefferson Mancera Silva">
@@ -150,18 +151,7 @@ import { Github as GithubIcon, React, Nodedotjs, Typescript, Tailwindcss, Docker
       </ul>
     </section>
 
-    <section class="mt-6">
-      <h2 class="text-lg font-semibold text-white">Proyectos destacados</h2>
-      <p><a href={import.meta.env.BASE_URL + '/projects'} class="font-medium text-white hover:underline">Ver todos los proyectos &rarr;</a></p>
-    </section>
-
-    <section class="mt-8 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
-      <h2 class="text-lg font-semibold text-white">About</h2>
-      <p class="mt-2 text-[0.9375rem] text-white/85">
-        Portafolio personal desarrollado para mostrar mis proyectos y experiencia como desarrollador Full Stack.
-        Construido con enfoque en simplicidad, rendimiento y diseño limpio.
-      </p>
-    </section>
+    <FeaturedProjects />
 
   </main>
 </Base>

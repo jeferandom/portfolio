@@ -4,6 +4,7 @@ description: "Plataforma integral para la creación, gestión y publicación de 
 date: 2024
 tags: ["React", "Redux", "Express.js", "MongoDB", "Mongoose", "Passport.js"]
 repo: ""
+featured: true
 ---
 
 ## **Descripción**
