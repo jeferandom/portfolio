@@ -2,6 +2,11 @@
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Portfolio | Jhefferson Mancera Silva">
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600"></div>
+    <div class="grain absolute inset-0 opacity-[0.12] mix-blend-multiply dark:opacity-[0.18] dark:mix-blend-screen"></div>
+  </div>
+
   <main>
     <section
       class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3.5 dark:border-amber-800 dark:bg-amber-950/30"
@@ -47,33 +52,84 @@ import Base from '../layouts/Base.astro';
       </noscript>
     </section>
 
-    <h1 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+    <h1 class="text-2xl font-bold tracking-tight text-white">
       Hola, soy Jhefferson Mancera Silva
     </h1>
-    <p class="mt-2 text-[0.9375rem] text-zinc-700 dark:text-zinc-300">
+    <p class="mt-2 text-[0.9375rem] text-white/85">
       Full Stack Developer con 6 años de experiencia en JavaScript, especializado en React y
       Node.js. Experiencia en startups, equipos remotos y entrega continua.
     </p>
 
     <section class="mt-6">
-      <h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Tecnologías principales</h2>
-      <p class="mt-1 text-[0.9375rem] text-zinc-700 dark:text-zinc-300">
+      <h2 class="text-lg font-semibold text-white">Tecnologías principales</h2>
+      <p class="mt-1 text-[0.9375rem] text-white/85">
         React · Next.js · Node.js · NestJS · TypeScript · MongoDB · Docker
       </p>
     </section>
 
     <section class="mt-6">
-      <h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Contacto</h2>
+      <h2 class="text-lg font-semibold text-white">Contacto</h2>
       <ul class="flex list-none flex-wrap gap-x-4 gap-y-2">
-        <li><a href="https://github.com/jeferandom" class="text-blue-600 hover:underline dark:text-blue-400">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/jefjs/" class="text-blue-600 hover:underline dark:text-blue-400">LinkedIn</a></li>
-        <li><a href="mailto:contactjefjs@gmail.com" class="text-blue-600 hover:underline dark:text-blue-400">Email</a></li>
+        <li><a href="https://github.com/jeferandom" class="font-medium text-white hover:underline">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/jefjs/" class="font-medium text-white hover:underline">LinkedIn</a></li>
+        <li><a href="mailto:contactjefjs@gmail.com" class="font-medium text-white hover:underline">Email</a></li>
+        <li class="flex items-center gap-1.5">
+          <a
+            href="https://wa.me/573194652954"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-white hover:underline"
+          >
+            WhatsApp +573194652954
+          </a>
+          <button
+            type="button"
+            id="copy-whatsapp"
+            data-phone="+573194652954"
+            aria-label="Copiar número de WhatsApp"
+            title="Copiar número"
+            class="inline-flex items-center justify-center rounded-md border border-white/30 p-1 text-white/80 transition hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            <svg
+              data-icon="copy"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+            </svg>
+            <svg
+              data-icon="check"
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="hidden text-emerald-300"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+          </button>
+        </li>
       </ul>
     </section>
 
     <section class="mt-6">
-      <h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Proyectos destacados</h2>
-      <p><a href={import.meta.env.BASE_URL + '/projects'} class="text-blue-600 hover:underline dark:text-blue-400">Ver todos los proyectos &rarr;</a></p>
+      <h2 class="text-lg font-semibold text-white">Proyectos destacados</h2>
+      <p><a href={import.meta.env.BASE_URL + '/projects'} class="font-medium text-white hover:underline">Ver todos los proyectos &rarr;</a></p>
     </section>
   </main>
 </Base>
@@ -101,4 +157,30 @@ import Base from '../layouts/Base.astro';
   }
 
   updateCountdownHome();
+
+  const copyBtn = document.getElementById('copy-whatsapp');
+  copyBtn?.addEventListener('click', async () => {
+    const iconCopy = copyBtn.querySelector('[data-icon="copy"]');
+    const iconCheck = copyBtn.querySelector('[data-icon="check"]');
+
+    try {
+      await navigator.clipboard.writeText(copyBtn.dataset.phone ?? '');
+      iconCheck?.classList.remove('hidden');
+      iconCopy?.classList.add('hidden');
+      copyBtn.setAttribute('title', '¡Copiado!');
+      setTimeout(() => {
+        iconCopy?.classList.remove('hidden');
+        iconCheck?.classList.add('hidden');
+        copyBtn.setAttribute('title', 'Copiar número');
+      }, 1500);
+    } catch {
+      window.open(`https://wa.me/573194652954`, '_blank', 'noopener');
+    }
+  });
 </script>
+
+<style>
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+</style>
