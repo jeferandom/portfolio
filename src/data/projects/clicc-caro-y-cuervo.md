@@ -8,10 +8,13 @@ repo: "https://github.com/jef/clicc-25"
 
 ## Descripción
 
-**CLICC** es una plataforma de software para la gestión, procesamiento y análisis de corpus lingüísticos desarrollada para el Instituto Caro y Cuervo. Permite a investigadores subir textos, tokenizarlos automáticamente, buscar palabras clave y generar concordancias ( KWIC - Key Word In Context) sobre uno o múltiples corpus de forma simultanea.
+[**CLICC**](https://clicc.caroycuervo.gov.co/) es una plataforma de software para la gestión, procesamiento y análisis de corpus lingüísticos desarrollada para el Instituto Caro y Cuervo. Permite a investigadores subir textos, tokenizarlos automáticamente, buscar palabras clave y generar concordancias ( KWIC - Key Word In Context) sobre uno o múltiples corpus de forma simultanea.
 
 El sistema procesa textos en tres formatos de entrada (texto plano, CoNLL-U y TEI XML), almacena los tokens con anotaciones lingüísticas completas (lema, POS, dependencias) y ofrece una interfaz web moderna para realizar búsquedas avanzadas con contexto configurable.
-
+![alt text](../../assets/projects/clicc-caro-y-cuervo/scr_clicc_kwic.png)
+*Sistema de busqueda de concordancias.*
+![alt text](../../assets/projects/clicc-caro-y-cuervo/scr_clicc_src_alineacion.png)
+*Sistema de archivos multimedia alineados.*
 ## Tecnologías
 
 - **Next.js 15** (frontend)
@@ -31,6 +34,7 @@ El sistema procesa textos en tres formatos de entrada (texto plano, CoNLL-U y TE
 - Construí la interfaz de **búsquedas KWIC** con contexto configurable (izquierdo/derecho), paginación y combinación de resultados multi-corpus
 - Implementé el **sistema de tokenización** con estrategias por formato: texto plano (UDPipe/local), CoNLL-U (importación directa) y TEI XML (preservación de anotaciones)
 - Desarrollé el **backend NestJS** con arquitectura modular: módulos de corpus, archivos, tokens, autenticación, usuarios, idiomas, localización y correo
+- Desarrollé un **microservicio de email** independiente con Express y MongoDB como cola de mensajes, worker asíncrono con reintentos, lease-based duplicate prevention y envío SMTP via Office 365
 - Optimicé las consultas de MongoDB con índices estratégicos y inserciones en lotes de 10.000 tokens para altas prestaciones
 - Integré **FFmpeg** para la conversión automática de videos MOV a MP4 con diálogo de confirmación al usuario
 - Configuré el despliegue con PM2/Nginx en producción (HTTPS, reverse proxy, variables de entorno embebidas en build)
