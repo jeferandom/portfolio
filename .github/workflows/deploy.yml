@@ -10,7 +10,6 @@ permissions:
 
 concurrency:
   group: pages-deploy
-  policy: prefer-running
 
 jobs:
   deploy:
