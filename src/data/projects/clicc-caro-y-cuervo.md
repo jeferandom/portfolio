@@ -8,7 +8,7 @@ repo: ""
 
 ## Descripción
 
-[**CLICC**](https://clicc.caroycuervo.gov.co/) es una plataforma de software para la gestión, procesamiento y análisis de corpus lingüísticos desarrollada para el Instituto Caro y Cuervo. Permite a investigadores subir textos, tokenizarlos automáticamente, buscar palabras clave y generar concordancias ( KWIC - Key Word In Context) sobre uno o múltiples corpus de forma simultanea.
+[**CLICC**](https://clicc.caroycuervo.gov.co/) es una plataforma de software para la gestión, procesamiento y análisis de corpus lingüísticos desarrollada para el [Instituto Caro y Cuervo](https://www.caroycuervo.gov.co/). Permite a investigadores subir textos, tokenizarlos automáticamente, buscar palabras clave y generar concordancias ( KWIC - Key Word In Context) sobre uno o múltiples corpus de forma simultanea.
 
 El sistema procesa textos en tres formatos de entrada (texto plano, CoNLL-U y TEI XML), almacena los tokens con anotaciones lingüísticas completas (lema, POS, dependencias) y ofrece una interfaz web moderna para realizar búsquedas avanzadas con contexto configurable.
 ![alt text](../../assets/projects/clicc-caro-y-cuervo/scr_clicc_kwic.png)
