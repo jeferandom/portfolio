@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Github as GithubIcon, React, Nodedotjs, Typescript, Tailwindcss, Docker, Mongodb, Nextdotjs, Nestjs, Git, Instagram, Youtube, Discord, Whatsapp } from 'simple-icons-astro';
 ---
 <Base title="Portfolio | Jhefferson Mancera Silva">
   <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
@@ -62,25 +63,47 @@ import Base from '../layouts/Base.astro';
 
     <section class="mt-6">
       <h2 class="text-lg font-semibold text-white">Tecnologías principales</h2>
-      <p class="mt-1 text-[0.9375rem] text-white/85">
-        React · Next.js · Node.js · NestJS · TypeScript · MongoDB · Docker
-      </p>
+      <div class="mt-2 flex flex-wrap gap-3">
+        <div class="flex items-center gap-1.5 text-white/90"><React class="h-5 w-5" /> React</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Nextdotjs class="h-5 w-5" /> Next.js</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Nodedotjs class="h-5 w-5" /> Node.js</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Nestjs class="h-5 w-5" /> NestJS</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Typescript class="h-5 w-5" /> TypeScript</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Mongodb class="h-5 w-5" /> MongoDB</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Docker class="h-5 w-5" /> Docker</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Tailwindcss class="h-5 w-5" /> Tailwind CSS</div>
+        <div class="flex items-center gap-1.5 text-white/90"><Git class="h-5 w-5" /> Git</div>
+      </div>
     </section>
 
     <section class="mt-6">
       <h2 class="text-lg font-semibold text-white">Contacto</h2>
       <ul class="flex list-none flex-wrap gap-x-4 gap-y-2">
-        <li><a href="https://github.com/jeferandom" class="font-medium text-white hover:underline">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/jefjs/" class="font-medium text-white hover:underline">LinkedIn</a></li>
-        <li><a href="mailto:contactjefjs@gmail.com" class="font-medium text-white hover:underline">Email</a></li>
+        <li>
+          <a href="https://github.com/jeferandom" class="flex items-center gap-1.5 font-medium text-white hover:underline">
+            <GithubIcon class="h-4 w-4" /> GitHub
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/jefjs/" class="flex items-center gap-1.5 font-medium text-white hover:underline">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href="mailto:contactjefjs@gmail.com" class="flex items-center gap-1.5 font-medium text-white hover:underline">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a>
+        </li>
         <li class="flex items-center gap-1.5">
           <a
             href="https://wa.me/573194652954"
             target="_blank"
             rel="noopener noreferrer"
-            class="font-medium text-white hover:underline"
+            class="flex items-center gap-1.5 font-medium text-white hover:underline"
           >
-            WhatsApp +573194652954
+            <Whatsapp class="h-4 w-4" /> WhatsApp +573194652954
           </a>
           <button
             type="button"
@@ -131,6 +154,15 @@ import Base from '../layouts/Base.astro';
       <h2 class="text-lg font-semibold text-white">Proyectos destacados</h2>
       <p><a href={import.meta.env.BASE_URL + '/projects'} class="font-medium text-white hover:underline">Ver todos los proyectos &rarr;</a></p>
     </section>
+
+    <section class="mt-8 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+      <h2 class="text-lg font-semibold text-white">About</h2>
+      <p class="mt-2 text-[0.9375rem] text-white/85">
+        Portafolio personal desarrollado para mostrar mis proyectos y experiencia como desarrollador Full Stack.
+        Construido con enfoque en simplicidad, rendimiento y diseño limpio.
+      </p>
+    </section>
+
   </main>
 </Base>
 
