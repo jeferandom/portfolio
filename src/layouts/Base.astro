@@ -1,4 +1,7 @@
 ---
+import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
 interface Props {
   title: string;
   description?: string;
@@ -12,76 +15,42 @@ const { title, description = 'Portfolio' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     <link rel="icon" href={import.meta.env.BASE_URL + '/favicon.ico'} />
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body {
-        font-family: system-ui, -apple-system, sans-serif;
-        line-height: 1.6;
-        color: #1a1a1a;
-        max-width: 640px;
-        margin: 0 auto;
-        padding: 1.5rem 1rem;
-      }
-      a { color: #2563eb; text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      nav { 
-        margin-bottom: 2rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 1rem;
-      }
-      nav a { 
-        margin-right: 0;
-        padding: 0.25rem 0;
-      }
-      footer { 
-        margin-top: 3rem; 
-        padding-top: 1rem; 
-        border-top: 1px solid #eee; 
-        color: #666; 
-        font-size: 0.875rem; 
-      }
-      article img, .prose img, main img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 6px;
-        margin: 1rem 0;
-      }
-      article p img, main p img {
-        margin: 0.5rem 0;
-      }
-      figure {
-        margin: 1rem 0;
-      }
-      figcaption {
-        font-size: 0.8125rem;
-        color: #666;
-        text-align: center;
-        margin-top: 0.375rem;
-      }
-      
-      @media (min-width: 640px) {
-        body {
-          padding: 2rem 1.5rem;
-        }
-        nav {
-          gap: 0 1rem;
-        }
-        footer {
-          margin-top: 4rem;
-        }
-      }
-    </style>
+    <script is:inline>
+      // Evita FOUC: aplica tema antes de pintar
+      (() => {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored ? stored : prefersDark ? 'dark' : 'light';
+          if (theme === 'dark') document.documentElement.classList.add('dark');
+        } catch {}
+      })();
+    </script>
   </head>
-  <body>
-    <nav>
-      <a href={import.meta.env.BASE_URL + '/'}>Inicio</a>
-      <a href={import.meta.env.BASE_URL + '/projects'}>Proyectos</a>
+  <body
+    class="mx-auto max-w-[640px] bg-white px-4 py-6 font-sans leading-relaxed text-zinc-900 antialiased transition-colors dark:bg-zinc-900 dark:text-zinc-100 sm:px-6 sm:py-8"
+  >
+    <nav class="mb-8 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap gap-x-4 gap-y-1">
+        <a
+          href={import.meta.env.BASE_URL + '/'}
+          class="py-1 text-blue-600 hover:underline dark:text-blue-400">Inicio</a
+        >
+        <a
+          href={import.meta.env.BASE_URL + '/projects'}
+          class="py-1 text-blue-600 hover:underline dark:text-blue-400">Proyectos</a
+        >
+      </div>
+      <ThemeToggle />
     </nav>
     <slot />
-    <footer>&copy; {new Date().getFullYear()}</footer>
+    <footer
+      class="mt-12 border-t border-zinc-200 pt-4 text-sm text-zinc-500 dark:border-zinc-800 dark:text-zinc-400 sm:mt-16"
+    >
+      &copy; {new Date().getFullYear()}
+    </footer>
   </body>
 </html>
