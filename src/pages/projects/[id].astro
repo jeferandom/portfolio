@@ -16,20 +16,20 @@ const { Content } = await render(project);
 <Base title={project.data.title} description={project.data.description}>
   <article>
     <a href={import.meta.env.BASE_URL + '/projects'}>&larr; Volver</a>
-    <h1 style="margin-top: 1rem;">{project.data.title}</h1>
-    <p style="color: #666;">{project.data.date.toLocaleDateString('es')}</p>
+    <h1 style="margin-top: 1rem; font-size: 1.5rem;">{project.data.title}</h1>
+    <p style="color: #666; font-size: 0.9375rem;">{project.data.date.toLocaleDateString('es')}</p>
     {project.data.tags && (
-      <div style="margin: 0.5rem 0;">
+      <div style="margin: 0.5rem 0; display: flex; flex-wrap: wrap; gap: 0.25rem;">
         {project.data.tags.map((tag) => (
-          <span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">{tag}</span>
+          <span style="background: #f0f0f0; padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">{tag}</span>
         ))}
       </div>
     )}
-    <div style="margin: 1rem 0;">
+    <div style="margin: 1rem 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem;">
       {project.data.url && <a href={project.data.url} target="_blank">Demo &rarr;</a>}
-      {project.data.repo && <a href={project.data.repo} target="_blank" style="margin-left: 1rem;">Código &rarr;</a>}
+      {project.data.repo && <a href={project.data.repo} target="_blank">Código &rarr;</a>}
     </div>
-    <div style="margin-top: 2rem;">
+    <div style="margin-top: 1.5rem;">
       <Content />
     </div>
   </article>

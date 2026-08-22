@@ -22,13 +22,58 @@ const { title, description = 'Portfolio' } = Astro.props;
         color: #1a1a1a;
         max-width: 640px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
       }
       a { color: #2563eb; text-decoration: none; }
       a:hover { text-decoration: underline; }
-      nav { margin-bottom: 2rem; }
-      nav a { margin-right: 1rem; }
-      footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid #eee; color: #666; font-size: 0.875rem; }
+      nav { 
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+      }
+      nav a { 
+        margin-right: 0;
+        padding: 0.25rem 0;
+      }
+      footer { 
+        margin-top: 3rem; 
+        padding-top: 1rem; 
+        border-top: 1px solid #eee; 
+        color: #666; 
+        font-size: 0.875rem; 
+      }
+      article img, .prose img, main img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 6px;
+        margin: 1rem 0;
+      }
+      article p img, main p img {
+        margin: 0.5rem 0;
+      }
+      figure {
+        margin: 1rem 0;
+      }
+      figcaption {
+        font-size: 0.8125rem;
+        color: #666;
+        text-align: center;
+        margin-top: 0.375rem;
+      }
+      
+      @media (min-width: 640px) {
+        body {
+          padding: 2rem 1.5rem;
+        }
+        nav {
+          gap: 0 1rem;
+        }
+        footer {
+          margin-top: 4rem;
+        }
+      }
     </style>
   </head>
   <body>
