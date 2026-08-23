@@ -8,7 +8,7 @@ const projects = (await getCollection('projects')).sort(
 ---
 <Base title="Proyectos">
   <main>
-    <section
+    <!-- <section
       class="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3.5 dark:border-amber-800 dark:bg-amber-950/30"
     >
       <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">En construcción</h2>
@@ -46,7 +46,7 @@ const projects = (await getCollection('projects')).sort(
       <noscript>
         <p class="mt-2 text-xs">Lanzamiento: 24 de agosto de 2026, 8:00 a. m.</p>
       </noscript>
-    </section>
+    </section> -->
     <h1 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Proyectos</h1>
     <ul class="mt-4 list-none">
       {projects.map((project) => (

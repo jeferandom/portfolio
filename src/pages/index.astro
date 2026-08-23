@@ -58,8 +58,8 @@ import { Github as GithubIcon, React, Nodedotjs, Typescript, Tailwindcss, Docker
       Hola, soy Jheff Mancera
     </h1>
     <p class="mt-2 text-[0.9375rem] text-white/85">
-      Full Stack Developer, viviendo en Cali Colombia, con 6 años de experiencia en desarrollo web, especializado en React y
-      Node.js.
+      Full Stack Developer, viviendo en Cali Colombia, con 6 años de experiencia. Enfocado en  
+      <span id="hero-typed" class="font-semibold text-white/95"></span><span id="hero-cursor" class="animate-pulse text-white/95">|</span>
     </p>
 
     <FeaturedProjects />
@@ -204,6 +204,39 @@ import { Github as GithubIcon, React, Nodedotjs, Typescript, Tailwindcss, Docker
 </Base>
 
 <script>
+  const typedEl = document.getElementById('hero-typed');
+  const cursorEl = document.getElementById('hero-cursor');
+  if (typedEl && cursorEl) {
+    const words = [' React y Node.js', ' Next.js y NestJs', ' Agentes de IA', ' Desarrollo asistido por IA'];
+    let wordIdx = 0;
+    let charIdx = 0;
+    let deleting = false;
+
+    function typeLoop() {
+      const current = words[wordIdx];
+      if (!deleting) {
+        typedEl!.textContent = current.slice(0, charIdx + 1);
+        charIdx++;
+        if (charIdx === current.length) {
+          setTimeout(() => { deleting = true; typeLoop(); }, 2000);
+          return;
+        }
+        setTimeout(typeLoop, 80);
+      } else {
+        typedEl!.textContent = current.slice(0, charIdx - 1);
+        charIdx--;
+        if (charIdx === 0) {
+          deleting = false;
+          wordIdx = (wordIdx + 1) % words.length;
+          setTimeout(typeLoop, 400);
+          return;
+        }
+        setTimeout(typeLoop, 40);
+      }
+    }
+    setTimeout(typeLoop, 1000);
+  }
+
   const target = new Date('2026-08-24T08:00:00').getTime();
 
   function updateCountdownHome() {
@@ -261,5 +294,12 @@ import { Github as GithubIcon, React, Nodedotjs, Typescript, Tailwindcss, Docker
 <style>
   .grain {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  #hero-cursor {
+    animation: blink 0.7s step-end infinite;
   }
 </style>
