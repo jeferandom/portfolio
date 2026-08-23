@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ImageZoom from '../../components/ImageZoom.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -54,7 +55,9 @@ const { Content } = await render(project);
     <div
       class="prose prose-zinc mt-6 max-w-none dark:prose-invert prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:mx-auto prose-img:rounded-md"
     >
-      <Content />
+      <ImageZoom>
+        <Content />
+      </ImageZoom>
     </div>
   </article>
 </Base>
