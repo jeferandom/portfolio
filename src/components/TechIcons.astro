@@ -1,0 +1,62 @@
+---
+import {
+  React,
+  Nodedotjs,
+  Typescript,
+  Tailwindcss,
+  Docker,
+  Mongodb,
+  Nextdotjs,
+  Nestjs,
+  Git,
+  Gatsby,
+  Angular,
+} from 'simple-icons-astro';
+
+interface Props {
+  icons: string[];
+  class?: string;
+}
+
+const iconMap: Record<string, any> = {
+  React,
+  Nodedotjs,
+  Typescript,
+  Tailwindcss,
+  Docker,
+  Mongodb,
+  Nextdotjs,
+  Nestjs,
+  Git,
+  Gatsby,
+  Angular,
+};
+
+const colorMap: Record<string, string> = {
+  React: '#61DAFB',
+  Nodedotjs: '#339933',
+  Typescript: '#3178C6',
+  Tailwindcss: '#06B6D4',
+  Docker: '#2496ED',
+  Mongodb: '#47A248',
+  Nextdotjs: '#000000',
+  Nestjs: '#E0234E',
+  Git: '#F05032',
+  Gatsby: '#663399',
+  Angular: '#DD0031',
+};
+
+const { icons, class: className = 'h-5 w-5' } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2">
+  {icons.map((name) => {
+    const Icon = iconMap[name];
+    if (!Icon) return null;
+    return (
+      <div class="flex items-center justify-center rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1.5 dark:border-zinc-700 dark:bg-zinc-800">
+        <Icon class={className} style={`color:${colorMap[name]}`} />
+      </div>
+    );
+  })}
+</div>

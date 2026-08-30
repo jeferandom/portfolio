@@ -2,7 +2,8 @@
 title: "CLICC - Plataforma de Análisis de Corpus Lingüísticos"
 description: "Plataforma integral para la gestión, tokenización y análisis de corpus lingüísticos con soporte para KWIC, concordancias y múltiples formatos."
 date: 2025-05-15
-tags: ["Next.js", "NestJS", "TypeScript", "MongoDB", "React"]
+tags: []
+techIcons: [Nextdotjs, Nestjs, Typescript, Mongodb, React, Tailwindcss]
 repo: ""
 featured: true
 ---

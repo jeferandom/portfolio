@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ImageZoom from '../../components/ImageZoom.astro';
+import TechIcons from '../../components/TechIcons.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -34,6 +35,11 @@ const { Content } = await render(project);
             >{tag}</span
           >
         ))}
+      </div>
+    )}
+    {project.data.techIcons && (
+      <div class="my-3">
+        <TechIcons icons={project.data.techIcons} />
       </div>
     )}
     <div class="my-4 flex flex-wrap gap-x-4 gap-y-2">
