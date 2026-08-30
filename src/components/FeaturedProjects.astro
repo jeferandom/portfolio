@@ -31,6 +31,15 @@ const featured = (await getCollection('projects'))
                 ))}
               </div>
             )}
+            {project.data.techIcons && (
+              <div class="mt-2.5 flex flex-wrap gap-1">
+                {project.data.techIcons.map((tech) => (
+                  <span class="rounded-full bg-white/15 px-2 py-0.5 text-xs text-white/80">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
           </a>
         </li>
       ))}

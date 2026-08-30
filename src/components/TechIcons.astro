@@ -11,11 +11,15 @@ import {
   Git,
   Gatsby,
   Angular,
+  Redux,
+  Express,
+  Javascript
 } from 'simple-icons-astro';
 
 interface Props {
   icons: string[];
   class?: string;
+  variant?: 'default' | 'card';
 }
 
 const iconMap: Record<string, any> = {
@@ -30,6 +34,9 @@ const iconMap: Record<string, any> = {
   Git,
   Gatsby,
   Angular,
+  Redux,
+  Express,
+  Javascript
 };
 
 const colorMap: Record<string, string> = {
@@ -44,18 +51,54 @@ const colorMap: Record<string, string> = {
   Git: '#F05032',
   Gatsby: '#663399',
   Angular: '#DD0031',
+  Redux: '#663399',
+  Express: '#ffffff',
+  Javascript: '#FFFF00',
 };
 
-const { icons, class: className = 'h-5 w-5' } = Astro.props;
+const nameMap: Record<string, string> = {
+  React: 'React',
+  Nodedotjs: 'Node.js',
+  Typescript: 'TypeScript',
+  Tailwindcss: 'Tailwind CSS',
+  Docker: 'Docker',
+  Mongodb: 'MongoDB',
+  Nextdotjs: 'Next.js',
+  Nestjs: 'NestJS',
+  Git: 'Git',
+  Gatsby: 'Gatsby',
+  Angular: 'Angular',
+  Redux: 'Redux',
+  Express: 'Express',
+  Javascript: 'JavaScript',
+};
+
+const { icons, class: className = 'h-5 w-5', variant = 'default' } = Astro.props;
+
+const wrapperClass = variant === 'card'
+  ? 'flex flex-wrap gap-1.5'
+  : 'flex flex-wrap gap-2';
+
+const iconBoxClass = variant === 'card'
+  ? 'flex items-center justify-center rounded-md border border-white/20 bg-white/10 px-2 py-1'
+  : 'flex items-center gap-1.5 rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1.5 dark:border-zinc-700 dark:bg-zinc-800';
 ---
 
-<div class="flex flex-wrap gap-2">
+<div class={wrapperClass}>
   {icons.map((name) => {
     const Icon = iconMap[name];
     if (!Icon) return null;
+    if (variant === 'card') {
+      return (
+        <div class={iconBoxClass}>
+          <Icon class={className} style={`color:${colorMap[name]}`} />
+        </div>
+      );
+    }
     return (
-      <div class="flex items-center justify-center rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1.5 dark:border-zinc-700 dark:bg-zinc-800">
+      <div class={iconBoxClass}>
         <Icon class={className} style={`color:${colorMap[name]}`} />
+        <span class="text-sm text-zinc-700 dark:text-zinc-300">{nameMap[name] || name}</span>
       </div>
     );
   })}

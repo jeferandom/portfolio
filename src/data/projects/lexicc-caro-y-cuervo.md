@@ -2,7 +2,8 @@
 title: "LEXICC - Sistema Gestor Lexicográfico"
 description: "Plataforma integral para la creación, gestión y publicación de diccionarios en línea con soporte para estructuras jerárquicas, referencias cruzadas y colaboración en equipo."
 date: 2024-08-15
-tags: ["React", "Redux", "Express.js", "MongoDB", "Mongoose", "Passport.js"]
+tags: []
+techIcons: [React, Redux, Express, Javascript, Mongodb, Passport]
 repo: ""
 featured: true
 ---
