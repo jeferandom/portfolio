@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,7 +10,7 @@
   }
 }
 
-/* Contenido Markdown - imágenes y tipografía básica sin @tailwindcss/typography */
+/* Contenido Markdown - imágenes y tipografía */
 @layer components {
   article img,
   .prose img {
