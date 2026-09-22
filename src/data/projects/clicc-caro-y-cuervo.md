@@ -31,17 +31,17 @@ El sistema procesa textos en tres formatos de entrada (texto plano, CoNLL-U y TE
 
 ## Lo que hice
 
-- Desarrollé el **frontend completo en Next.js** con arquitectura de layouts, autenticación, registro de usuarios y confirmación de email
-- Implementé el **dashboard de corpus** con tabla virtualizada, subida de archivos y gestión de metadatos geográficos (GeoJSON)
-- Construí la interfaz de **búsquedas KWIC** con contexto configurable (izquierdo/derecho), paginación y combinación de resultados multi-corpus
-- Implementé el **sistema de tokenización** con estrategias por formato: texto plano (UDPipe/local), CoNLL-U (importación directa) y TEI XML (preservación de anotaciones)
-- Desarrollé el **backend NestJS** con arquitectura modular: módulos de corpus, archivos, tokens, autenticación, usuarios, idiomas, localización y correo
-- Desarrollé un **microservicio de email** independiente con Express y MongoDB como cola de mensajes, worker asíncrono con reintentos, lease-based duplicate prevention y envío SMTP via Office 365
-- Optimicé las consultas de MongoDB con índices estratégicos y inserciones en lotes de 10.000 tokens para altas prestaciones
-- Integré **FFmpeg** para la conversión automática de videos MOV a MP4 con diálogo de confirmación al usuario
-- Configuré el despliegue con PM2/Nginx en producción (HTTPS, reverse proxy, variables de entorno embebidas en build)
-- Implementé migraciones de datos legacy para corpus, speakers y archivos
-- Agregué tests unitarios con Vitest para el backend y Testing Library para el frontend
+- Desarrollé el **frontend completo en Next.js 15 (App Router)**: layouts anidados, autenticación con JWT, registro de usuarios y flujo de confirmación por email
+- Implementé el **dashboard de corpus** con tabla virtualizada (renderiza solo las filas visibles para soportar miles de registros), subida de archivos y metadatos geográficos en GeoJSON
+- Construí la interfaz de **búsqueda de concordancias (KWIC - Key Word In Context)**: muestra cada aparición de la palabra buscada junto a N tokens de contexto a izquierda y derecha, con paginación y resultados combinados de varios corpus
+- Implementé el **pipeline de tokenización** con una estrategia por formato de entrada: texto plano (tokenizado con UDPipe en el servidor), CoNLL-U (importación directa de tokens y anotaciones) y TEI XML (parseo preservando anotaciones)
+- Desarrollé el **backend NestJS** con arquitectura modular por dominio: corpus, archivos, tokens, autenticación, usuarios, idiomas, localización y correo
+- Desarrollé un **microservicio de email** independiente (Express + MongoDB como cola de trabajos) con worker asíncrono, reintentos con backoff, lease `lockedUntil` para evitar envíos duplicados y SMTP por Office 365
+- Optimicé el acceso a datos en MongoDB con índices compuestos para las consultas de concordancias y escrituras masivas (`insertMany`) en lotes de 10.000 tokens para cargar corpus grandes sin agotar memoria
+- Integré **FFmpeg** para convertir videos MOV a MP4 en el servidor, con diálogo de confirmación al usuario antes de procesar
+- Configuré el despliegue en producción con PM2 + Nginx (HTTPS, reverse proxy y secretos inyectados como variables de entorno en build)
+- Implementé scripts ETL para migrar datos legacy (MySQL → MongoDB) de corpus, speakers y archivos
+- Agregué tests unitarios con Vitest en el backend y Testing Library en el frontend
 
 ## Arquitectura
 
