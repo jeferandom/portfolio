@@ -64,3 +64,67 @@ clicc-backend/     (Backend - NestJS)
       ├── location/     (ubicaciones geográficas)
       └── files/        (subida y conversión de archivos)
 ```
+
+## Caso técnico backend
+
+> Código privado del Instituto. A continuación el diseño, contratos y despliegue verificables, sin exponer fuente ni secretos.
+
+### 1. Arquitectura en producción
+
+```
+Browser --> Nginx :80/443 --> Next.js :3002 (frontend)
+                          --> NestJS :8010 /api (backend) --> MongoDB
+Backend --POST /api/send-mail (x-api-token)--> clicc-mailer :4000
+  --> mailQueue (Mongo) --> worker polling 10s --> SMTP Office 365 :587
+```
+
+* `clicc-backend`: NestJS 10 + TypeScript, modular (`auth, user, corpus, files, tokenization, mail, settings`), Swagger, validación con `class-validator`, `ScheduleModule` para jobs.
+* `clicc-mailer`: Express + Mongoose + Nodemailer, API + worker en un solo proceso PM2 (`combined.js`).
+* `clicc-25`: Next.js 15 + React 19 + Zustand + Zod.
+
+### 2. Contratos API
+
+`POST /api/auth/login` → JWT + confirmación por email. `401` si no confirmado, nunca `404` si Nginx apunta bien.
+
+`POST /api/send-mail` — Header `x-api-token: <token>`:
+```json
+{ "to": "user@ejemplo.com", "subject": "Asunto", "html": "<p>Hola</p>" }
+```
+* `200 {"ok":true,"id":"..."}` encolado, `400` campos faltantes, `403` token inválido.
+
+`POST /kwic/generate`:
+```json
+{ "form": "análisis", "leftContext": 5, "rightContext": 5, "corpusId": "corpus-principal" }
+```
+
+### 3. Cola `mailQueue` y worker
+
+```js
+{ to, subject, html, status: 'pending|sending|sent|failed',
+  attempts: 0, lastError: String, lockedUntil: Date, sentAt: Date }
+ // índice { status: 1, lockedUntil: 1 }
+```
+
+Worker cada `POLL_MS=10000`, lote 10:
+1. Reclama `pending` no bloqueados → `sending + lockedUntil = now + 5min` (lease anti-duplicado).
+2. `sendMail` por SMTP. Éxito → `sent`. Fallo → `attempts++`, si `>=5` → `failed`, si no → `pending` para reintento.
+
+### 4. Despliegue Azure
+
+VM Ubuntu LTS + Node 20 vía `nvm` + `PM2` + `Nginx` reverse proxy + SSL:
+* `location /api → 127.0.0.1:8010`, `location / → 127.0.0.1:3002`, `client_max_body_size 2048M`.
+* `ecosystem.config.js`: apps `clicc-backend` y `clicc-frontend` + `clicc-mailer`, `pm2 save + pm2 startup`.
+* Secretos solo por entorno (`MONGODB_URI, JWT_SECRET, MAIL_X_API_TOKEN`), nunca en git. Monitoreo con `pm2 status/logs/monit`.
+
+### 5. Decisiones clave
+
+* Cola en Mongo en vez de envío sincrónico: el backend no se cae si SMTP falla.
+* Microservicio separado: si el monolito se apaga, el correo sigue funcionando.
+* Lease `lockedUntil`: permite 1 instancia PM2 hoy y N instancias mañana sin duplicados.
+* ETL legacy: scripts `extract/import` MySQL → Mongo para corpus, speakers y archivos + `seed:settings` idempotente.
+
+### 6. Cómo lo llevaría a su stack
+
+* A Cloud Run: dockerizar `clicc-mailer` y backend, mismo contrato, secretos a Secret Manager, worker como Cloud Run Job / Cloud Scheduler.
+* A Firestore: mismo modelo `mailQueue`, colección `mailQueue` con `status + lockedUntil`, transacciones para el lease.
+* A WhatsApp Cloud API: mismo patrón que `mail.service.ts` — `POST graph.facebook.com/.../messages` con token, webhook de estados, reintentos y logs.

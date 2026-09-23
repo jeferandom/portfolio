@@ -20,6 +20,7 @@
 
   function applyTheme(theme: 'dark' | 'light') {
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY, theme);
   }
 
@@ -39,6 +40,7 @@
   media.addEventListener('change', (e) => {
     if (!localStorage.getItem(STORAGE_KEY)) {
       document.documentElement.classList.toggle('dark', e.matches);
+      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
     }
   });
 
